@@ -26,12 +26,12 @@
 }
 
 .newBook {
-	width: 20%;
 	margin: 0 auto;
 	display: grid;
-	grid-template-columns: 1fr 90%;
+	grid-template-columns: 150px;
 	gap: 1em;
 	accent-color: black;
+	place-content: center;
 }
 
 .header span {
@@ -43,16 +43,15 @@
 
 .newBook input {
 	background: white;
-	border: 2px solid white;
+	border: 3px solid white;
 	border-radius: 0.5em;
 	padding-inline: 1em;
-	transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in;
 }
 
 .newBook input:focus {
 	outline: none;
-	border: 2px solid black;
-	font-weight: bold;
+	border: 3px solid chartreuse;
 }
 
 .newBook input[type="checkbox"] {
@@ -222,6 +221,22 @@ h2 {
 }
 
 @media (max-width: 1000px) {
+	.newBook {
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+		gap: 0.5em;
+	}
+
+	.newBook span {
+		text-align: center;
+	}
+
+	.newBook input {
+		margin-bottom: 1em;
+		padding-block: 1em;
+	}
+
 	.main {
 		grid-template-columns: 1fr 1fr;
 	}
