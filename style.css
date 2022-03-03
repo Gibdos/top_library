@@ -123,10 +123,6 @@
 	transition: all 250ms ease-in-out;
 }
 
-.delete {
-	transform: rotate(360deg);
-}
-
 .card:nth-of-type(even) {
 	background: url(./assets/cover_red.jpg) center no-repeat;
 }
