@@ -13,7 +13,6 @@ function Book() {
 	this.author = "";
 	this.pages = 0;
 	this.read = false;
-	this.index = 0;
 }
 
 // Add book to arrBooks Library
@@ -27,53 +26,47 @@ btnAdd.addEventListener("click", () => {
 	createBook.author = inputAuthor.value;
 	createBook.pages = inputPages.value;
 	createBook.read = inputRead.checked;
-	createBook.index = i;
 	arrBooks.push(createBook);
-	addBookDisplay(arrBooks[i]);
+	displayLib();
 });
 
-function addBookDisplay(book) {
-	let card = document.createElement("div");
-	card.classList.add("card", `book-${book.index}`);
-	card.innerHTML = `<h3>${book.name}</h3><p>by ${book.author}</p><p>Pages: ${book.pages}</p>`;
-	if (book.read) {
-		card.innerHTML += `<p>Read: <input data-index="${book.index}" type="checkbox" name="lib-read" checked />`;
-		domMain.appendChild(card);
-		// const tickCheck = domMain.querySelector(`[data-index="${book.index}"]`);
-		// trackTicks(tickCheck, book);
-	} else {
-		card.innerHTML += `<p>Read: <input data-index="${book.index}" type="checkbox" name="lib-read" />`;
-		domMain.appendChild(card);
-	}
-	const tickRead = domMain.querySelector(`[data-index="${book.index}"]`); //WHY BROKEN?
-	trackTicks(tickRead);
-	card.innerHTML += `<button class="book-index-${book.index}" type="button">X</button>`;
-	const delCheck = domMain.querySelector(`.book-index-${book.index}`);
-	removeBook(delCheck, book);
-	domMain.appendChild(card);
-	inputName.value = "";
-	inputAuthor.value = "";
-	inputPages.value = "";
-	inputRead.checked = 0;
-}
-
 // Change book.read in arrBooks on click
-function trackTicks(tickRead) {
-	tickRead.addEventListener("click", () => {
-		console.log("Click");
-		const bookIndex = arrBooks.indexOf(book);
-		console.log(bookIndex);
-		arrBooks[bookIndex].read = false;
+function trackTicks(index) {
+	const bookIndex = index;
+	const checkRead = document.querySelector(`.read-${bookIndex}`);
+	checkRead.addEventListener("click", () => {
+		arrBooks[bookIndex].read = !arrBooks[bookIndex].read;
 	});
 }
 
-// Remove book from HTML and arrBooks
-function removeBook(bookNode, book) {
+// Remove book from arrBooks and update HTML
+function removeBook(index) {
+	const bookIndex = index;
+	const bookNode = document.querySelector(`.book-index-${bookIndex}`);
 	bookNode.addEventListener("click", () => {
 		const delBookNode = bookNode.parentElement;
-		const bookIndex = arrBooks.indexOf(book);
-		// console.log(bookIndex);
 		arrBooks.splice(bookIndex, 1);
 		domMain.removeChild(delBookNode).index;
+		displayLib();
+	});
+}
+
+// Array loop for display
+function displayLib() {
+	domMain.innerHTML = "";
+	arrBooks.forEach((element, index) => {
+		const bookIndex = index;
+		let card = document.createElement("div");
+		card.classList.add("card", `book-${bookIndex}`);
+		card.innerHTML = `<h3>${element.name}</h3><p>by ${element.author}</p><p>Pages: ${element.pages}</p>`;
+		if (element.read) {
+			card.innerHTML += `<p>Read: <input class="read-${bookIndex}" type="checkbox" name="lib-read" checked /></p>`;
+		} else {
+			card.innerHTML += `<p>Read: <input class="read-${bookIndex}" type="checkbox" name="lib-read" /></p>`;
+		}
+		card.innerHTML += `<button class="book-index-${bookIndex}" type="button"></button>`;
+		domMain.appendChild(card);
+		removeBook(bookIndex);
+		trackTicks(bookIndex);
 	});
 }
