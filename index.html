@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>The Odin Project - Library</title>
+		<link rel="stylesheet" href="./style.css" />
+		<script src="./script.js" defer></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>The Great Library of<br />"The Odin Project"</h1>
+				<div class="newBook">
+					<h2>Add a new book to the Library.</h2>
+					<input
+						type="text"
+						name="title"
+						id="book-title"
+						placeholder="Book Title"
+					/>
+					<input
+						type="text"
+						name="author"
+						id="book-author"
+						placeholder="Author"
+					/>
+					<input
+						type="number"
+						name="pages"
+						id="book-pages"
+						placeholder="No. of pages"
+					/>
+					<input type="checkbox" name="read" id="book-read" />
+					<label for="read">Book read</label>
+					<button type="button" id="add-book">Add Book</button>
+				</div>
+			</div>
+			<div class="main"></div>
+			<div class="footer">Copyright 2022 Gibdos</div>
+		</div>
+	</body>
+</html>
